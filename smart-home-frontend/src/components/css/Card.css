@@ -1,0 +1,29 @@
+.card {
+  background-color: #2e2e2e;
+  color: #fff;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 12px;
+  width: 150px;
+  flex-basis: 22%; /* Adjusted for fitting four cards */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6); /* Stronger hover shadow */
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 20px; /* Increased font size */
+  font-weight: 600; /* Bolder titles */
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}

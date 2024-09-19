@@ -1,0 +1,35 @@
+.sidebar {
+  width: 250px;
+  background-color: #1e1e1e;
+  color: #fff;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 28px; /* Larger title */
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #d4af37; /* Luxurious gold */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  color: #d4af37; /* Golden color */
+}

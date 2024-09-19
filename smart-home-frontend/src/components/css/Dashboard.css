@@ -1,0 +1,24 @@
+.dashboard {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+  height: 100vh;
+}
+
+.overview {
+  margin-bottom: 30px; /* Added more space for Overview title */
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px; /* Added gap for better spacing */
+}
+
+.cards .card {
+  flex: 1 1 10px; /* Ensure cards fit nicely on smaller screens */
+  max-width: 150px; /* Prevent cards from stretching too wide */
+}
