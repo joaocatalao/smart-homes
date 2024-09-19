@@ -14,7 +14,9 @@ public class DeviceService {
 
     @Transactional
     public Device addDevice(Device device) {
+        System.out.println("Persisting device: " + device); // Log the device before persisting
         device.persist();
+        System.out.println("Device persisted: " + device);
         return device;
     }
 
