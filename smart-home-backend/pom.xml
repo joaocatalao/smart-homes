@@ -31,14 +31,7 @@
 
     <dependencies>
         <!-- Quarkus RESTEasy Reactive for REST APIs -->
-        <!--
         
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-reactive</artifactId>
-        </dependency>
-        
-        -->
 
         <!-- Quarkus Hibernate ORM with Panache -->
         <dependency>
