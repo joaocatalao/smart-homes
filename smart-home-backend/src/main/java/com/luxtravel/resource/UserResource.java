@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.HashSet;
 import java.util.Arrays;
+import jakarta.annotation.security.RolesAllowed;
+
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -52,6 +54,19 @@ public class UserResource {
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
         return Response.ok(response).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Transactional
+    public Response deleteUser(@PathParam("id") Long id) {
+        User user = User.findById(id);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
+        }
+
+        user.delete();
+        return Response.noContent().build(); // 204 No Content
     }
 
 }
