@@ -2,6 +2,7 @@ package com.example.resource;
 
 import com.example.entity.Device;
 import com.example.service.DeviceService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -18,12 +19,14 @@ public class DeviceResource {
 
     // 1. GET: List all devices
     @GET
+    @RolesAllowed("User")
     public List<Device> getDevices() {
         return deviceService.listAllDevices();  // Service to get all devices
     }
 
     // 2. POST: Add a new device
     @POST
+    @RolesAllowed("User")
     public Response addDevice(Device device) {
         deviceService.addDevice(device);  // Service to add a device
         return Response.status(Response.Status.CREATED).build();  // Return HTTP 201 Created
@@ -32,6 +35,7 @@ public class DeviceResource {
     // 3. GET: Get device by ID
     @GET
     @Path("/{id}")  // The {id} is a path parameter
+    @RolesAllowed("User")
     public Response getDeviceById(@PathParam("id") Long id) {
         Device device = deviceService.findById(id);
         if (device == null) {
@@ -43,6 +47,7 @@ public class DeviceResource {
     // 4. PUT: Update a device
     @PUT
     @Path("/{id}")  // Update device using its ID
+    @RolesAllowed("User")
     public Response updateDevice(@PathParam("id") Long id, Device updatedDevice) {
         deviceService.updateDevice(id, updatedDevice);
         return Response.ok(updatedDevice).build();  // Return the updated device with 200 OK
@@ -51,6 +56,7 @@ public class DeviceResource {
     // 5. DELETE: Remove a device by ID
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("User")
     public Response deleteDevice(@PathParam("id") Long id) {
         boolean removed = deviceService.removeDevice(id);  // Service to delete device
         if (!removed) {
