@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.entity.Device;
 import com.example.events.DeviceEvent;
+import io.smallrye.reactive.messaging.annotations.Channel;
+import io.smallrye.reactive.messaging.annotations.Emitter;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
@@ -15,6 +17,11 @@ public class DeviceService {
     @Inject
     Event<DeviceEvent> deviceEvent;  // Inject Quarkus Event Bus
 
+    // MQTT Emitter for device messages
+    @Inject
+    @Channel("device-status-out")
+    Emitter<String> mqttEmitter;
+
     // List all devices
     public List<Device> listAllDevices() {
         return Device.listAll();
@@ -25,6 +32,8 @@ public class DeviceService {
     public Device addDevice(Device device) {
         device.persist();
         deviceEvent.fire(new DeviceEvent(device.name, "Device Added", "Device was successfully added."));
+        // Publish device addition to MQTT
+        publishToMQTT(device.name, "Device Added");
         return device;
     }
 
@@ -42,6 +51,8 @@ public class DeviceService {
             device.type = updatedDevice.type;
             device.status = updatedDevice.status;
             deviceEvent.fire(new DeviceEvent(device.name, "Device Updated", "Device status was updated."));
+            // Publish device update to MQTT
+            publishToMQTT(device.name, "Device Updated");
         }
     }
 
@@ -51,7 +62,15 @@ public class DeviceService {
         boolean deleted = Device.deleteById(id);
         if (deleted) {
             deviceEvent.fire(new DeviceEvent(id.toString(), "Device Removed", "Device was successfully removed."));
+            // Publish device removal to MQTT
+            publishToMQTT(id.toString(), "Device Removed");
         }
         return deleted;
+    }
+
+    // Helper method to publish to MQTT
+    private void publishToMQTT(String deviceName, String status) {
+        String message = "Device: " + deviceName + ", Status: " + status;
+        mqttEmitter.send(message);  // Publish the status message to the MQTT broker
     }
 }

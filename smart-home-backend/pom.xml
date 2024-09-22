@@ -51,10 +51,10 @@
             <artifactId>quarkus-websockets</artifactId>
         </dependency>
 
-        <!-- MQTT Messaging (if needed) -->
+        <!-- MQTT Messaging -->
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-reactive-messaging-mqtt</artifactId>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
         </dependency>
 
         <!-- Quarkus JUnit 5 Test Dependency -->
